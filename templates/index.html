@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}股邮推 - 吴姐推送{% endblock %}
+
+
+{% block page_content %}
+{% filter markdown %}
+###吴姐推送
+吴姐推送是一个实时邮件推送
+<a href="http://blog.sina.com.cn/s/articlelist_1216826604_0_1.html"
+  target="_blank">wu2198股市直播</a>中仓位变化的免费服务。
+
+---
+###订阅
+{% endfilter %}
+
+{{ wtf.quick_form(form, horizontal_columns=('lg', 2, 20)) }}
+
+<div>
+  <p>
+  </p>
+  <p>
+  你的邮箱将只用于吴姐推送，你也可以随时取消订阅。还等什么？<b>赶快订阅吧！</b>
+  </p>
+</div>
+{% filter markdown %}
+---
+###常见问题
+
+####每天会收到多少邮件？
+一般5封左右，包括吴姐每次交易的推送、11:40的一封上午直播以及15:10的一封今日直播。
+也就是说收信量是与吴姐交易次数相关的。
+
+####邮件推送的及时性如何？
+吴姐博客一有仓位更新，10s左右可收到邮件。
+
+<b>注意</b>：
+倘若11:00 买进10%券商股，邮件接收时间为10:05。
+延时五分钟是因为吴姐在10:05才更新博客，而不是推送服务延时5分钟。
+
+####收到邮件后，我如何第一时间看到邮件？
+QQ邮箱订阅的用户，
+
+电脑端登陆QQ，一般会实时弹框提醒。若不提醒，
+请按该解决方案（下载
+<a href="http://7xnj62.com1.z0.glb.clouddn.com/推送邮件电脑QQ不弹框提醒解决方案.doc"
+  target="_blank">Word版</a>、
+<a href="http://7xnj62.com1.z0.glb.clouddn.com/推送邮件电脑QQ不弹框提醒解决方案.pdf" 
+  target="_blank">PDF版</a>）设置，或者自行Google、百度。
+
+手机端可用QQ邮箱客户端或微信接收。
+
+其他邮箱订阅的用户，手机端可以使用QQ邮箱客户端、网易邮箱等软件接收。
+
+<b>建议</b>：用QQ邮箱订阅，电脑登陆QQ、手机用QQ邮箱客户端都可及时提醒（微信有时会延迟）。
+
+####每天接收推送邮件，我的收件箱看起来都是股票邮件，这样不太好，怎么办？
+QQ邮箱的话，教你一个好招(下载
+<a href="http://7xnj62.com1.z0.glb.clouddn.com/QQ收件箱推送邮件整理.doc"
+  target="_blank">Word版</a>、
+<a href="http://7xnj62.com1.z0.glb.clouddn.com/QQ收件箱推送邮件整理.pdf"
+  target="_blank">PDF版</a>）
+)，可立马让收件箱变的清净，而且不影响查看推送邮件。
+
+163、126、yeah等邮箱请自行Google、百度进行解决，比如搜“163邮箱收件箱归档”。邮箱应该都有这个功能的。
+####该推送服务收费吗？
+不收费。
+
+但是本人使用了邮件服务商SendCloud的付费服务，以及服务器也有相应的租金。
+
+如果你觉得这个服务帮助到了你，希望你能帮我分担一下，支持此服务，已使服务持续下去。
+
+支持渠道后期会开放。
+{% endfilter %}
+{% endblock %}
