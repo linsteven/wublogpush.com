@@ -1,10 +1,17 @@
 {% extends "bootstrap/base.html" %}
+{% block scripts %}
+{{super()}}
+<link rel="stylesheet" type="text/css"
+  media="screen and (max-device-width: 960px)"
+  href="{{url_for('.static', filename='tinyScreen.css',_external=True)}}" />
+{% endblock %}
 
 {% block title %}股邮推-吴姐推送{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
+<div class="navbar navbar-inverse" role="navigation"
+  style="background-color:#505050;font-color:#505023">
+    <div id="divMain" class="container" >
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -12,14 +19,28 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">股邮推</a>
+            <a class="navbar-brand" href="/">
+              <span style="color:white;font-size:22px">股邮推</span></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">吴姐推送</a></li>
+              <li><a href="/"><span style="color:white;font-size:17px">吴姐推送</span></a></li>
             </ul>
             <ul class="nav navbar-nav">
-                <li><a href="/">关于</a></li>
+              <li><a href="/pushes/">
+                <span style="color:white;font-size:17px">最新一期</span></a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li><a href="/FAQ/">
+                <span style="color:white;font-size:17px">常见问题</span></a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li><a href="/donate/">
+                <span style="color:white;font-size:17px">赞助</span></a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li><a href="/about/">
+                <span style="color:white;font-size:17px">关于</span></a></li>
             </ul>
         </div>
     </div>
@@ -27,7 +48,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div id="divMain" class="container">
     {% block page_content %}{% endblock %}
     <br>
     <hr style="color:#000000" />

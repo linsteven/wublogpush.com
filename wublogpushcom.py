@@ -8,12 +8,32 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import InputRequired, Email
 from flaskext.markdown import Markdown
 from flask import Markup
+from flask.ext.sqlalchemy import SQLAlchemy
 
+basedir = "/Users/yyl/Projects/WublogPush2"
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+        'sqlite:///' + os.path.join(basedir, 'wuPushes.sqlite')
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 Markdown(app)
 app.secret_key = os.environ.get('SECKET_KEY') or \
     ' \x9c6-\xe9\xbb\xd0\xea\xf8F\xde\xb5wy\x99,G\xbd\xe8\xe8\xb3_\x08!'
+
+class Push(db.Model):
+    __tablename__ = 'Pushes'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text)
+    time = db.Column(db.Text)
+    news = db.Column(db.Text)
+    deals = db.Column(db.Text)
+    content = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Mesg %r>' % self.content
 
 class EmailForm(Form):
     email = StringField(u"电子邮箱",[InputRequired(u"请输入邮箱"),\
@@ -30,6 +50,29 @@ def index():
         form.email.data = ''
     return render_template('index.html',form=form)
 
+@app.route('/pushes/', methods=['GET'])
+def pushes():
+    push = Push.query.first()
+    if push is None:
+        return render_template('pushes.html')
+    else:
+        return render_template('pushes.html', 
+            pushTitle = push.title, pushTime = push.time,
+            news = push.news, deals = push.deals, 
+            content = push.content)
+
+@app.route('/FAQ/', methods=['GET'])
+def FAQ():
+    return render_template('FAQ.html')
+
+@app.route('/donate/', methods=['GET'])
+def donate():
+    return render_template('donate.html')
+
+@app.route('/about/', methods=['GET'])
+def about():
+    #return url_for('about')
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", debug=True)
