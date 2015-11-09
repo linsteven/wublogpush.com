@@ -10,7 +10,9 @@ from flaskext.markdown import Markdown
 from flask import Markup
 from flask.ext.sqlalchemy import SQLAlchemy
 
-basedir = "/Users/yyl/Projects/WublogPush2"
+basedir = "/Users/yyl/Projects/WuBlogPush2"
+#basedir = "/home/yyl/WuBlogPush2"
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'wuPushes.sqlite')
