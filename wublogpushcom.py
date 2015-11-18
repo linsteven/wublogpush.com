@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template,redirect, url_for
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
@@ -10,9 +10,7 @@ from flaskext.markdown import Markdown
 from flask import Markup
 from flask.ext.sqlalchemy import SQLAlchemy
 
-basedir = "/Users/yyl/Projects/WuBlogPush2"
-#basedir = "/home/yyl/WuBlogPush2"
-
+basedir = "/home/yyl/WuBlogPush2"
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'wuPushes.sqlite')
@@ -52,9 +50,9 @@ def index():
         form.email.data = ''
     return render_template('index.html',form=form)
 
-@app.route('/pushes/', methods=['GET'])
-def pushes():
-    push = Push.query.first()
+@app.route('/pushes/<int:push_id>', methods=['GET'])
+def pushes(push_id):
+    push = Push.query.filter_by(id=push_id).first()
     if push is None:
         return render_template('pushes.html')
     else:
@@ -62,6 +60,16 @@ def pushes():
             pushTitle = push.title, pushTime = push.time,
             news = push.news, deals = push.deals, 
             content = push.content)
+
+@app.route('/pushes/', methods=['GET'])
+def latestPush():
+    latestPushId = Push.query.order_by('-id').first().id
+    print latestPushId
+    return redirect(url_for('pushes', push_id=latestPushId))
+    #    return render_template('pushes.html', 
+    #        pushTitle = push.title, pushTime = push.time,
+    #        news = push.news, deals = push.deals, 
+    #        content = push.content)
 
 @app.route('/FAQ/', methods=['GET'])
 def FAQ():
