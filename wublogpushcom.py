@@ -31,6 +31,7 @@ class Push(db.Model):
     news = db.Column(db.Text)
     deals = db.Column(db.Text)
     content = db.Column(db.Text)
+    url = db.Column(db.Text)
 
     def __repr__(self):
         return '<Mesg %r>' % self.content
@@ -59,7 +60,7 @@ def pushes(push_id):
         return render_template('pushes.html', 
             pushTitle = push.title, pushTime = push.time,
             news = push.news, deals = push.deals, 
-            content = push.content)
+            content = push.content, url = push.url)
 
 @app.route('/pushes/', methods=['GET'])
 def latestPush():
