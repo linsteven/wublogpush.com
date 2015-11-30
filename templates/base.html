@@ -2,7 +2,7 @@
 {% block scripts %}
 {{super()}}
 <link rel="stylesheet" type="text/css"
-  media="screen and (max-device-width: 960px)"
+  media="screen and (min-device-width: 960px)"
   href="{{url_for('.static', filename='tinyScreen.css',_external=True)}}" />
 {% endblock %}
 
@@ -11,7 +11,7 @@
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation"
   style="background-color:#505050;font-color:#505023">
-    <div id="divMain" class="container" >
+    <div class="container" >
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -48,7 +48,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="divMain" class="container">
+<div class="container">
     {% block page_content %}{% endblock %}
     <br>
     <hr style="color:#000000" />
