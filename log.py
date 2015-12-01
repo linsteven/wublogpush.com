@@ -1,10 +1,27 @@
 #coding=utf-8
-import sys
 import time
+import datetime
 
-def LogError(mesg) :
-  date = time.strftime('%Y%m%d',time.localtime(time.time()))
-  logFile = open('error_' + date + '.log', 'a')
-  logFile.write(mesg + '\n')
+def LogEmailActivate(mesg) :
+  dt = datetime.datetime.now()
+  date = dt.strftime('%Y%m')
+  logFile = open('./Log/emailActivate_' + date + '.log','a')
+  ctime = dt.strftime('%m-%d %H:%M:%S  ')
+  logFile.write(ctime + mesg + '\n')
   logFile.close()
 
+def LogEmailSuccess(mesg):
+  dt = datetime.datetime.now()
+  date = dt.strftime('%Y%m')
+  logFile = open('./Log/emailSuccess_' + date + '.log','a')
+  ctime = dt.strftime('%m-%d %H:%M:%S  ')
+  logFile.write(ctime + mesg  + '\n')
+  logFile.close()
+    
+def LogAddToAddr(mesg):
+  dt = datetime.datetime.now()
+  date = dt.strftime('%Y%m')
+  logFile = open('./Log/addToAddr_' + date + '.log','a')
+  ctime = dt.strftime('%m-%d %H:%M:%S  ')
+  logFile.write(ctime + mesg  + '\n')
+  logFile.close()
