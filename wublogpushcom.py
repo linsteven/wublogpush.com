@@ -11,8 +11,8 @@ from flaskext.markdown import Markdown
 from flask import Markup
 from flask.ext.sqlalchemy import SQLAlchemy
 from mytoken import generate_confirmation_token, confirm_token
-from sendemail import sendActivate, sendSuccess
-from addToAddr import addToAddrLst
+from sendemail import sendActivate, sendSuccess, sendUnsubscribe
+from doAddressLst import addToAddrLst, delFromAddrLst
 
 #basedir = "/home/yyl/WuBlogPush2"
 basedir = "/Users/yyl/Projects/WuBlogPush2"
@@ -46,14 +46,16 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.Text, unique=True, nullable=False)
+    token = db.Column(db.Text, unique=True, nullable=False)
     subscribed_on = db.Column(db.DateTime, nullable=False)
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
     unsubscribed = db.Column(db.Boolean, nullable=False, default=False)
     unsubscribed_on = db.Column(db.DateTime, nullable=True)
     
-    def __init__(self, email, confirmed):
+    def __init__(self, email, token, confirmed):
         self.email = email
+        self.token = token
         self.subscribed_on = datetime.datetime.now()
         self.confirmed = confirmed
         self.confirmed_on = None
@@ -83,23 +85,24 @@ def index():
         isConfirmed = False
         #add user to db
         user = User.query.filter_by(email=email).first()
+        token = generate_confirmation_token(email)
         if user is None:
-            user = User(email=email,confirmed=False)
+            user = User(email=email,token=token,confirmed=False)
             db.session.add(user)
             db.session.commit()
         elif user.confirmed:
             isConfirmed = True
-            flash(u'你已订阅过吴姐推送。<br>\
-                    如果你还没有收到过任何吴姐推送的邮件，\
-                    请联系<a href="http://wublogpush.com/about/"><b>我</b></a>')
+            flash(u'您已订阅过吴姐推送。<br>\
+                    如果您还没有收到过任何吴姐推送的邮件，\
+                    请<a href="http://wublogpush.com/about/"><b>联系我</b></a>')
         else:
             user.subscribed_on = datetime.datetime.now()
+            db.session.add(user)
             db.session.commit()
         # send email of validation
-        token = generate_confirmation_token(email)
         if isConfirmed is False:
             sendActivate(email, token)
-            flash(u'你已成功订阅吴姐推送，请尽快进入您的邮箱 ' + email + u' 完成激活。')
+            flash(u'您已成功订阅吴姐推送，请尽快进入您的邮箱 ' + email + u' 完成激活。')
         form.email.data = ''
         return redirect(url_for('index'))
     return render_template('index.html',form=form)
@@ -109,19 +112,35 @@ def confirm_email(token):
     try:
         email = confirm_token(token)
     except:
-        flash(u'链接无效或已过期，请重新订阅！')
+        flash(u'链接无效，请重新订阅！')
     if email is False:
-        flash(u'链接无效或已过期，请重新订阅！')
+        flash(u'链接无效，请重新订阅！')
     user = User.query.filter_by(email=email).first_or_404()
     if user.confirmed is False:
         user.confirmed = True
         user.confirmed_on = datetime.datetime.now()
+        user.unsubscribed = False
         db.session.add(user)
         db.session.commit()
         sendSuccess(email)
         addToAddrLst(email)
-    flash(email + u' 你已成功订阅吴姐推送！')
+    flash(email + u' 您已成功订阅吴姐推送！')
     return redirect(url_for('index'))
+
+@app.route('/unsubscribe/<string:token>', methods=['GET'])
+def unsubscribe(token):
+    try:
+        email = confirm_token(token)
+    except:
+        flash(u'链接无效！')
+    user = User.query.filter_by(email=email).first_or_404()
+    if user.unsubscribed is False:
+        user.unsubscribed = True
+        user.unsubscribed_on = datetime.datetime.now()
+        db.session.add(user)
+        db.session.commit()
+        sendUnsubscribe(email, token)
+        delFromAddrLst(email)
 
 @app.route('/pushes/<int:push_id>', methods=['GET'])
 def pushes(push_id):
