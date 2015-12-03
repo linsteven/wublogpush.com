@@ -14,8 +14,8 @@ from mytoken import generate_confirmation_token, confirm_token
 from sendemail import sendActivate, sendSuccess, sendUnsubscribe
 from doAddressLst import addToAddrLst, delFromAddrLst
 
-#basedir = "/home/yyl/WuBlogPush2"
-basedir = "/Users/yyl/Projects/WuBlogPush2"
+basedir = "/home/yyl/WuBlogPush2"
+#basedir = "/Users/yyl/Projects/WuBlogPush2"
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'wublogpush.sqlite')
@@ -84,7 +84,10 @@ def index():
         email = str(email)
         isConfirmed = False
         #add user to db
-        user = User.query.filter_by(email=email).first()
+        try:
+            user = User.query.filter_by(email=email).first()
+        except:
+            user = None
         token = generate_confirmation_token(email)
         if user is None:
             user = User(email=email,token=token,confirmed=False)
@@ -124,6 +127,12 @@ def confirm_email(token):
         db.session.commit()
         sendSuccess(email)
         addToAddrLst(email)
+    elif user.confirmed is True  and user.unsubscribed is True:
+        user.unsubscribed = False
+        db.session.add(user)
+        db.session.commit()
+        addToAddrLst(email)
+        sendSuccess(email)
     flash(email + u' 您已成功订阅吴姐推送！')
     return redirect(url_for('index'))
 
@@ -140,7 +149,8 @@ def unsubscribe(token):
         db.session.add(user)
         db.session.commit()
         sendUnsubscribe(email, token)
-        delFromAddrLst(email)
+        #delFromAddrLst(email) #put in sendUnsubscribe solve problems
+    return render_template('unsubscribe.html')
 
 @app.route('/pushes/<int:push_id>', methods=['GET'])
 def pushes(push_id):

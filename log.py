@@ -7,7 +7,7 @@ def LogEmailActivate(mesg) :
   date = dt.strftime('%Y%m')
   logFile = open('./Log/emailActivate_' + date + '.log','a')
   ctime = dt.strftime('%m-%d %H:%M:%S  ')
-  logFile.write(ctime + mesg + '\n')
+  logFile.write(ctime + mesg + '\n\n')
   logFile.close()
 
 def LogEmailSuccess(mesg):
@@ -15,7 +15,7 @@ def LogEmailSuccess(mesg):
   date = dt.strftime('%Y%m')
   logFile = open('./Log/emailSuccess_' + date + '.log','a')
   ctime = dt.strftime('%m-%d %H:%M:%S  ')
-  logFile.write(ctime + mesg  + '\n')
+  logFile.write(ctime + mesg  + '\n\n')
   logFile.close()
     
 def LogEmailUnsubscribe(mesg):
@@ -23,7 +23,7 @@ def LogEmailUnsubscribe(mesg):
   date = dt.strftime('%Y%m')
   logFile = open('./Log/emailUnsubscribe_' + date + '.log','a')
   ctime = dt.strftime('%m-%d %H:%M:%S  ')
-  logFile.write(ctime + mesg  + '\n')
+  logFile.write(ctime + mesg  + '\n\n')
   logFile.close()
 
 def LogAddToAddr(mesg):
@@ -31,7 +31,7 @@ def LogAddToAddr(mesg):
   date = dt.strftime('%Y%m')
   logFile = open('./Log/addToAddr_' + date + '.log','a')
   ctime = dt.strftime('%m-%d %H:%M:%S  ')
-  logFile.write(ctime + mesg  + '\n')
+  logFile.write(ctime + mesg  + '\n\n')
   logFile.close()
 
 def LogDelFromAddr(mesg):
@@ -39,5 +39,14 @@ def LogDelFromAddr(mesg):
   date = dt.strftime('%Y%m')
   logFile = open('./Log/delFromAddr_' + date + '.log','a')
   ctime = dt.strftime('%m-%d %H:%M:%S  ')
-  logFile.write(ctime + mesg  + '\n')
+  logFile.write(ctime + mesg  + '\n\n')
+  logFile.close()
+
+
+def LogDebug(mesg):
+  dt = datetime.datetime.now()
+  date = dt.strftime('%Y%m')
+  logFile = open('./Log/debug_' + date + '.log','a')
+  ctime = dt.strftime('%m-%d %H:%M:%S  ')
+  logFile.write(ctime + mesg  + '\n\n')
   logFile.close()

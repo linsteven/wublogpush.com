@@ -3,6 +3,7 @@ import requests, json
 import time
 import os
 from log import LogEmailActivate, LogEmailSuccess, LogEmailUnsubscribe
+from doAddressLst import delFromAddrLst
 
 mailUrl = "http://sendcloud.sohu.com/webapi/mail.send_template.json"
 
@@ -33,6 +34,7 @@ def sendActivate(email, token) :
     }
   r = requests.post(mailUrl, files={}, data=params)
   LogEmailActivate(email + ' ' + token + ' ' + r.text)
+  delFromAddrLst(email)
 
 def sendSuccess(email) :
   toLst = list()
