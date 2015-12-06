@@ -7,7 +7,7 @@ from doAddressLst import delFromAddrLst
 
 mailUrl = "http://sendcloud.sohu.com/webapi/mail.send_template.json"
 
-API_USER = 'trigger_wu_test'
+API_USER = 'linsteven_wu_confirm'
 API_KEY = os.environ.get('API_KEY')
 
 def sendActivate(email, token) :
@@ -34,7 +34,6 @@ def sendActivate(email, token) :
     }
   r = requests.post(mailUrl, files={}, data=params)
   LogEmailActivate(email + ' ' + token + ' ' + r.text)
-  delFromAddrLst(email)
 
 def sendSuccess(email) :
   toLst = list()
@@ -81,6 +80,7 @@ def sendUnsubscribe(email, token):
     }
   r = requests.post(mailUrl, files={}, data=params)
   LogEmailUnsubscribe(email + ' ' + r.text)
+
 #sendActivate('1656758436@qq.com','esfhweufbwefnweifw')
 #sendSuccess('1656758436@qq.com')
 #sendUnsubscribe('1656758436@qq.com', 'fsagergreher')

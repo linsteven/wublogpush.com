@@ -93,7 +93,7 @@ def index():
             user = User(email=email,token=token,confirmed=False)
             db.session.add(user)
             db.session.commit()
-        elif user.confirmed:
+        elif user.confirmed and user.unsubscribed is False:
             isConfirmed = True
             flash(u'您已订阅过吴姐推送。<br>\
                     如果您还没有收到过任何吴姐推送的邮件，\
@@ -122,11 +122,10 @@ def confirm_email(token):
     if user.confirmed is False:
         user.confirmed = True
         user.confirmed_on = datetime.datetime.now()
-        user.unsubscribed = False
         db.session.add(user)
         db.session.commit()
-        sendSuccess(email)
         addToAddrLst(email)
+        sendSuccess(email)
     elif user.confirmed is True  and user.unsubscribed is True:
         user.unsubscribed = False
         db.session.add(user)
@@ -149,7 +148,7 @@ def unsubscribe(token):
         db.session.add(user)
         db.session.commit()
         sendUnsubscribe(email, token)
-        #delFromAddrLst(email) #put in sendUnsubscribe solve problems
+        delFromAddrLst(email) 
     return render_template('unsubscribe.html')
 
 @app.route('/pushes/<int:push_id>', methods=['GET'])
@@ -188,4 +187,4 @@ def internal_server_error(e):
 
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", debug=True)
+    app.run(host="0.0.0.0", debug=True)

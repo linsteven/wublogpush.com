@@ -26,18 +26,18 @@ def LogEmailUnsubscribe(mesg):
   logFile.write(ctime + mesg  + '\n\n')
   logFile.close()
 
-def LogAddToAddr(mesg):
+def LogSubscribe(mesg):
   dt = datetime.datetime.now()
   date = dt.strftime('%Y%m')
-  logFile = open('./Log/addToAddr_' + date + '.log','a')
+  logFile = open('./Log/subscribe_' + date + '.log','a')
   ctime = dt.strftime('%m-%d %H:%M:%S  ')
   logFile.write(ctime + mesg  + '\n\n')
   logFile.close()
 
-def LogDelFromAddr(mesg):
+def LogUnsubscribe(mesg):
   dt = datetime.datetime.now()
   date = dt.strftime('%Y%m')
-  logFile = open('./Log/delFromAddr_' + date + '.log','a')
+  logFile = open('./Log/unsubscribe_' + date + '.log','a')
   ctime = dt.strftime('%m-%d %H:%M:%S  ')
   logFile.write(ctime + mesg  + '\n\n')
   logFile.close()
