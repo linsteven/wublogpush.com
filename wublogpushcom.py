@@ -105,7 +105,7 @@ def index():
         # send email of validation
         if isConfirmed is False:
             sendActivate(email, token)
-            flash(u'您已成功订阅吴姐推送，请尽快进入您的邮箱 ' + email + u' 完成激活。')
+            flash(u'请尽快进入您的邮箱 ' + email + u' 完成激活，激活后即可订阅成功！')
         form.email.data = ''
         return redirect(url_for('index'))
     return render_template('index.html',form=form)
