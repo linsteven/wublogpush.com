@@ -159,20 +159,20 @@ def pushes(push_id):
         news = push.news, deals = push.deals, 
         content = push.content, url = push.url)
 
-@app.route('/pushes/', methods=['GET'])
+@app.route('/pushes', methods=['GET'])
 def latestPush():
     latestPushId = Push.query.order_by('-id').first_or_404().id
     return redirect(url_for('pushes', push_id=latestPushId))
 
-@app.route('/FAQ/', methods=['GET'])
+@app.route('/FAQ', methods=['GET'])
 def FAQ():
     return render_template('FAQ.html')
 
-@app.route('/donate/', methods=['GET'])
+@app.route('/donate', methods=['GET'])
 def donate():
     return render_template('donate.html')
 
-@app.route('/about/', methods=['GET'])
+@app.route('/about', methods=['GET'])
 def about():
     #return url_for('about')
     return render_template('about.html')
