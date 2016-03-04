@@ -52,7 +52,7 @@ class User(db.Model):
     confirmed_on = db.Column(db.DateTime, nullable=True)
     unsubscribed = db.Column(db.Boolean, nullable=False, default=False)
     unsubscribed_on = db.Column(db.DateTime, nullable=True)
-    
+
     def __init__(self, email, token, confirmed):
         self.email = email
         self.token = token
@@ -148,15 +148,15 @@ def unsubscribe(token):
         db.session.add(user)
         db.session.commit()
         sendUnsubscribe(email, token)
-        delFromAddrLst(email) 
+        delFromAddrLst(email)
     return render_template('unsubscribe.html')
 
 @app.route('/pushes/<int:push_id>', methods=['GET'])
 def pushes(push_id):
     push = Push.query.filter_by(id=push_id).first_or_404()
-    return render_template('pushes.html', 
+    return render_template('pushes.html',
         pushTitle = push.title, pushTime = push.time,
-        news = push.news, deals = push.deals, 
+        news = push.news, deals = push.deals,
         content = push.content, url = push.url)
 
 @app.route('/pushes', methods=['GET'])
@@ -167,6 +167,10 @@ def latestPush():
 @app.route('/FAQ', methods=['GET'])
 def FAQ():
     return render_template('FAQ.html')
+
+@app.route('/thanks', methods=['GET'])
+def thanks():
+    return render_template('thanks.html')
 
 @app.route('/donate', methods=['GET'])
 def donate():
