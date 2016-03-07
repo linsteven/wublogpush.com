@@ -172,6 +172,11 @@ def FAQ():
 def thanks():
     return render_template('thanks.html')
 
+@app.route('/lastestId')
+def api_lastestId():
+    latestPushId = Push.query.order_by('-id').first_or_404().id
+    return str(latestPushId)
+
 @app.route('/donate', methods=['GET'])
 def donate():
     return render_template('donate.html')
