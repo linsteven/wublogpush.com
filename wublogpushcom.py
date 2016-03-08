@@ -181,6 +181,10 @@ def api_lastestId():
 def donate():
     return render_template('donate.html')
 
+@app.route('/tip', methods=['GET'])
+def tip():
+    return render_template('tip.html')
+
 @app.route('/about', methods=['GET'])
 def about():
     #return url_for('about')
