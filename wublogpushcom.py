@@ -95,9 +95,9 @@ def index():
             db.session.commit()
         elif user.confirmed and user.unsubscribed is False:
             isConfirmed = True
-            flash(u'您已订阅过吴姐推送。<br>\
-                    如果您还没有收到过任何吴姐推送的邮件，\
-                    请<a href="http://wublogpush.com/about/"><b>联系我</b></a>')
+            flash(u'您已订阅过小王子推送。<br>\
+                    如果您还没有收到过任何小王子推送的邮件，\
+                    请<a href="http://wublogpush.com/about"><b>联系我</b></a>')
         else:
             user.subscribed_on = datetime.datetime.now()
             db.session.add(user)
@@ -132,7 +132,7 @@ def confirm_email(token):
         db.session.commit()
         addToAddrLst(email)
         sendSuccess(email)
-    flash(email + u' 您已成功订阅吴姐推送！')
+    flash(email + u' 您已成功订阅小王子推送！')
     return redirect(url_for('index'))
 
 @app.route('/unsubscribe/<string:token>', methods=['GET'])
