@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}最新一期 - 小王子推送{% endblock %}
+{% block title %}第{{pushId}}期 - 小王子推送{% endblock %}
 
 {% block page_content %}
 <h3>{{pushTitle}}</h3>
-<div>
+<p style="line-height:1.5;">
+ 小王子推送第{{pushId}}期<br>
   推送时间：{% if pushTime %}{{pushTime}}{% else %}未知{% endif %}
-</div>
+</p>
+<hr>
+<ul class="pager">
+    <li class="previous"><a href="{{preId}}">&larr; 上一篇</a></li>
+    <li class="next"><a href="{{nextId}}">下一篇 &rarr;</a></li>
+</ul>
 <hr>
 {% if news %}
 <h style="font-size:20px"><b>最新动态</b></h>
@@ -35,6 +41,29 @@
       style="color: #6495ED;text-decoration:none;"·
       target="_blank">查看原文</a>
   </div>
+<hr>
+<ul class="pager">
+    <li class="previous"><a href="{{preId}}">&larr; 上一篇</a></li>
+    <li class="next"><a href="{{nextId}}">下一篇 &rarr;</a></li>
+</ul>
+<hr>
 
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="pushes_{{pushId}}" data-title="第{{pushId}}期 - 小王子推送"
+      data-url="http://wublogpush.com/pushes/{{pushId}}"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wublogpush"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
 
   {% endblock %}

@@ -153,15 +153,33 @@ def unsubscribe(token):
 
 @app.route('/pushes/<int:push_id>', methods=['GET'])
 def pushes(push_id):
-    push = Push.query.filter_by(id=push_id).first_or_404()
+    MAXID = 365 * 10 * 100
+    lastest_id = Push.query.order_by('-id').first_or_404().id
+    if push_id == 0:
+        flash(u'已是最早一篇')
+        return redirect(url_for('pushes', push_id=1))
+    elif push_id == MAXID :
+        flash(u'已是最新一篇')
+        return redirect(url_for('pushes', push_id=lastest_id))
+    else:
+        pre_id = push_id - 1
+        next_id = push_id + 1
+        if push_id == lastest_id:
+            next_id = MAXID
+        cur_id = push_id
+    push = Push.query.filter_by(id=cur_id).first_or_404()
     return render_template('pushes.html',
+        pushId = push_id, preId = pre_id, nextId = next_id,
         pushTitle = push.title, pushTime = push.time,
         news = push.news, deals = push.deals,
         content = push.content, url = push.url)
 
 @app.route('/pushes', methods=['GET'])
 def latestPush():
-    latestPushId = Push.query.order_by('-id').first_or_404().id
+    try:
+        latestPushId = Push.query.order_by('-id').first_or_404().id
+    except:
+        return render_template('404.html'), 404
     return redirect(url_for('pushes', push_id=latestPushId))
 
 @app.route('/FAQ', methods=['GET'])
