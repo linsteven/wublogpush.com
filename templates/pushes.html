@@ -4,7 +4,7 @@
 
 {% block page_content %}
 <h3>{{pushTitle}}</h3>
-<p style="line-height:1.5;">
+<p style="line-height:1.8;">
  小王子推送第{{pushId}}期<br>
   推送时间：{% if pushTime %}{{pushTime}}{% else %}未知{% endif %}
 </p>
@@ -26,6 +26,13 @@
 <h style="font-size:20px"><b>今日交易</b></h>
   <p style="line-height:2; font-size:16px">
     {{deals|safe}}
+  </p>
+  <hr style="height:1px;border:none;border-top:1px dashed #E0E0E0;" />
+{% endif %}
+{% if changes %}
+<h style="font-size:20px"><b>仓位变化</b></h>
+  <p style="line-height:2; font-size:16px">
+    {{changes|safe}}
   </p>
   <hr style="height:1px;border:none;border-top:1px dashed #E0E0E0;" />
 {% endif %}
@@ -65,5 +72,6 @@ var duoshuoQuery = {short_name:"wublogpush"};
   })();
   </script>
 <!-- 多说公共JS代码 end -->
+
 
   {% endblock %}

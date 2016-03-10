@@ -14,29 +14,29 @@ from mytoken import generate_confirmation_token, confirm_token
 from sendemail import sendActivate, sendSuccess, sendUnsubscribe
 from doAddressLst import addToAddrLst, delFromAddrLst
 
-basedir = "/home/yyl/WuBlogPush2"
-#basedir = "/Users/yyl/Projects/WuBlogPush2"
+#basedir = "/home/yyl/WuBlogPush2"
+basedir = "/Users/yyl/Projects/WuBlogPush2"
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'wublogpush.sqlite')
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-
+app.secret_key = os.environ.get('SECR_KEY') or \
+    ' \x9c6-\xe9\xbb\xd0\xea\xf8F\xde\xb5wy\x99,G\xbd\xe8\xe8\xb3_\x08!'
 db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 Markdown(app)
-app.secret_key = os.environ.get('SECR_KEY') or \
-    ' \x9c6-\xe9\xbb\xd0\xea\xf8F\xde\xb5wy\x99,G\xbd\xe8\xe8\xb3_\x08!'
 
 class Push(db.Model):
     __tablename__ = 'pushes'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Text)
     time = db.Column(db.Text)
-    news = db.Column(db.Text)
     deals = db.Column(db.Text)
+    changes = db.Column(db.Text)
     content = db.Column(db.Text)
     url = db.Column(db.Text)
+    news = db.Column(db.Text)
 
     def __repr__(self):
         return '<Mesg %r>' % self.content
@@ -171,7 +171,7 @@ def pushes(push_id):
     return render_template('pushes.html',
         pushId = push_id, preId = pre_id, nextId = next_id,
         pushTitle = push.title, pushTime = push.time,
-        news = push.news, deals = push.deals,
+        news = push.news, deals = push.deals,changes=push.changes,
         content = push.content, url = push.url)
 
 @app.route('/pushes', methods=['GET'])
