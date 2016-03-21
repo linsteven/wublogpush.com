@@ -13,6 +13,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from mytoken import generate_confirmation_token, confirm_token
 from sendemail import sendActivate, sendSuccess, sendUnsubscribe
 from doAddressLst import addToAddrLst, delFromAddrLst
+from log import LogGoPushes
+from log import LogGoPushesEnd
 
 #basedir = "/home/yyl/WuBlogPush2"
 basedir = "/Users/yyl/Projects/WuBlogPush2"
@@ -150,6 +152,17 @@ def unsubscribe(token):
         sendUnsubscribe(email, token)
         delFromAddrLst(email)
     return render_template('unsubscribe.html')
+
+@app.route('/gopushes/<int:go_push_id>', methods=['GET'])
+def go_pushes(go_push_id):
+    LogGoPushes()
+    return redirect(url_for('pushes', push_id=go_push_id))
+
+
+@app.route('/gopushesend/<int:go_push_id>', methods=['GET'])
+def go_pushes_end(go_push_id):
+    LogGoPushesEnd()
+    return redirect(url_for('pushes', push_id=go_push_id))
 
 @app.route('/pushes/<int:push_id>', methods=['GET'])
 def pushes(push_id):

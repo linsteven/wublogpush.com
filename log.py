@@ -42,6 +42,21 @@ def LogUnsubscribe(mesg):
   logFile.write(ctime + mesg  + '\n\n')
   logFile.close()
 
+def LogGoPushes():
+  dt = datetime.datetime.now()
+  date = dt.strftime('%Y%m')
+  logFile = open('./Log/gopushes_' + date + '.log','a')
+  ctime = dt.strftime('%m-%d %H:%M:%S  ')
+  logFile.write(ctime + '\n\n')
+  logFile.close()
+
+def LogGoPushesEnd():
+  dt = datetime.datetime.now()
+  date = dt.strftime('%Y%m')
+  logFile = open('./Log/gopushesend_' + date + '.log','a')
+  ctime = dt.strftime('%m-%d %H:%M:%S  ')
+  logFile.write(ctime + '\n\n')
+  logFile.close()
 
 def LogDebug(mesg):
   dt = datetime.datetime.now()
