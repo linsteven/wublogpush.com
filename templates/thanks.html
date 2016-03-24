@@ -2,8 +2,15 @@
 
 {% block title %}鸣谢 - 小王子推送{% endblock %}
 
+{% block content %}
+{{super()}}
+<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
+<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
+{% endblock %}
+
 {% block page_content %}
-<h3>鸣谢</h3>
+<div style="border: 0px solid; height: 70px;"></div>
+<h3><i class="fa fa-gift fa-fw"></i> 鸣谢</h3>
 <hr>
 <p>
 <li style="line-height:2.0;font-size:16px">
@@ -13,19 +20,22 @@ target="_blank">「wu2198」</a>在<a href="http://blog.sina.com.cn/s/articlelis
 style="color: #6495ED;text-decoration:none;" target="_blank">「新浪博客」</a>的无私奉献
 </li>
 <li style="line-height:2.0;font-size:16px">
+    感谢我的好朋友国君第一个体验使用，并给予了宝贵的意见
+</li>
+<li style="line-height:2.0;font-size:16px">
     感谢社团话事人、钇博、Andy、超级牛宝宝、威威虎、棉棉等在初期的帮助、鼓励或反馈
 </li>
 <li style="line-height:2.0;font-size:16px">
-    感谢知易的「建群、禁言」的建议，没有他的建议，就没有直播群，直播服务极大地节省了刷博客的时间
+    感谢知易的「建群、禁言」的建议，没有他的建议，就没有直播群，从而帮助大家节省了大量刷博客的时间
 </li>
 <li style="line-height:2.0;font-size:16px">
-    感谢飞影的「仓位变化突出显示」的建议，使得直播内容重点突出、直播服务更上一层楼
+    感谢飞影的「仓位变化突出显示」「添加空间指数与操作策略直播」的建议，帮助了直播内容做得越来越好
 </li>
 <li style="line-height:2.0;font-size:16px">
     感谢每一位体验邮件推送、群直播的朋友，是你们让我觉得自己在做一件有意义的事
 </li>
 <li style="line-height:2.0;font-size:16px">
-    感谢赞助的朋友们，你们的支持是对「小王子推送」以及我的最大的肯定
+    感谢赞助的朋友们，是你们的支持让「小王子推送」这个服务一直持续下去
 </li>
 </p>
 <hr>
@@ -481,9 +491,39 @@ style="color: #6495ED;text-decoration:none;" target="_blank">「新浪博客」<
           <td>2016-03-06</td>
         </tr>
         <tr>
+          <th scope="row">9</th>
+          <td>wizard</td>
+          <td>支付宝</td>
+          <td>2016-03-08</td>
+        </tr>
+        <tr>
+          <th scope="row">10</th>
+          <td>FC</td>
+          <td>微信支付</td>
+          <td>2016-03-21</td>
+        </tr>
+        <tr>
+          <th scope="row">11</th>
+          <td>小马</td>
+          <td>微信支付</td>
+          <td>2016-03-21</td>
+        </tr>
+        <tr>
+          <th scope="row">12</th>
+          <td>玉兰油</td>
+          <td>微信支付</td>
+          <td>2016-03-21</td>
+        </tr>
+        <tr>
+          <th scope="row">13</th>
+          <td>刘焱</td>
+          <td>微信支付</td>
+          <td>2016-03-21</td>
+        </tr>
+        <tr>
           <th scope="row">总计</th>
           <td></td>
-          <td>￥226</td>
+          <td>￥298.8</td>
           <td></td>
         </tr>
       </tbody>

@@ -1,80 +1,123 @@
 {% extends "bootstrap/base.html" %}
 {% block scripts %}
 {{super()}}
-<link rel="stylesheet" type="text/css"
-  media="screen and (min-device-width: 960px)"
-  href="{{url_for('.static', filename='tinyScreen.css',_external=True)}}" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap Core CSS -->
+
+  <!-- Custom CSS -->
+  <link href="{{url_for('.static', filename='./css/landing-page.css',_external=True)}}" rel="stylesheet" type="text/css"/>
 
 
+  <!-- Custom Fonts -->
+     <link href="{{url_for('.static', filename='./font-awesome/css/font-awesome.min.css',_external=True)}}" rel="stylesheet" type="text/css"/>
+     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+   <script src="{{url_for('.static', filename='./css/inline.css',_external=True)}}"></script>
+   <script src="{{url_for('.static', filename='./js/Chart.js',_external=True)}}"></script>
+   <script src="{{url_for('.static', filename='./js/script.js',_external=True)}}"></script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
 {% endblock %}
 
 {% block title %}小王子推送{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation"
-  style="background-color:#505050;font-color:#505023">
-    <div class="container" >
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">
-              <span style="color:white;font-size:22px">小王子推送</span></a>
+            <a class="navbar-brand topnav" href="/">
+              <span style="font-size:18px">小王子推送</span>
+            </a>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="/"><span style="color:white;font-size:17px">首页</span></a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-              <li><a href="/pushes">
-                <span style="color:white;font-size:17px">最新一期</span></a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-              <li><a href="/FAQ">
-                <span style="color:white;font-size:17px">常见问题</span></a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-              <li><a href="/thanks">
-                <span style="color:white;font-size:17px">鸣谢</span></a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-              <li><a href="/donate">
-                <span style="color:white;font-size:17px">赞助</span></a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-              <li><a href="/about">
-                <span style="color:white;font-size:17px">关于</span></a></li>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/positions">仓位统计</span></a>
+                </li>
+                <li>
+                    <a href="/pushes">最新一期</span></a>
+                </li>
+                <li>
+                    <a href="/FAQ">常见问题</a>
+                </li>
+                <li>
+                    <a href="/thanks">鸣谢</a>
+                </li>
+                <li>
+                    <a href="/donate">赞助</a>
+                </li>
+                <li>
+                    <a href="/about">关于</a>
+                </li>
             </ul>
         </div>
+        <!-- /.navbar-collapse -->
     </div>
-</div>
+    <!-- /.container -->
+</nav>
 {% endblock %}
 
 {% block content %}
+{% block index_content %}{% endblock %}
+
 <div class="container" >
-{% for message in get_flashed_messages() %}
-<div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    {{ message|safe }}
-</div>
-{% endfor %}
 
     {% block page_content %}{% endblock %}
 </div>
 
-<br>
-<hr style="color:#000000" />
-<div >
-  <p style="text-align: center;font-size: smaller">
-    © Copyright 2015 wublogpush.com 苏ICP备15049508号
-    <script type="text/javascript">
-    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257873908'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257873908%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-  </p>
-  <br>
-</div>
+
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="list-inline">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="/FAQ">常见问题</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="/about#comment">留言反馈</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="/about">关于</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small">Copyright &copy; 2015-2016 小王子推送﹣wublogpush.com 苏ICP备15049508号</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75311298-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 {% endblock %}

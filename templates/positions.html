@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}仓位 - 小王子推送{% endblock %}
+
+{% block content %}
+{{super()}}
+<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
+<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
+{% endblock %}
+
+{% block page_content %}
+<div style="border: 0px solid; height: 70px;"></div>
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message|safe }}
+    </div>
+{% endfor %}
+<h3><i class="fa fa-line-chart fa-fw"></i> 仓位统计</h3>
+<hr>
+
+<div style="width:80%;text-align:center;margin:0 auto;">
+    <div>
+        <p style="text-align:center;font-size:18px;">wu2198股市直播仓位变化图</p>
+    </div>
+    <div>
+        <canvas id="canvas" height="350" width="800"></canvas>
+    </div>
+    <br>
+    <div style="text-align:right">
+    <p style="font-size:16px;">最近交易日数：
+        <a href="/positions/{{ is_all }}7" class="btn {% if size == 7  %}btn-primary{% else %} btn-default {% endif %}"><span class="network-name">7 天</span></a>
+        <a href="/positions/{{ is_all }}15" class="btn {% if size == 15  %}btn-primary{% else %} btn-default {% endif %}"><span class="network-name">15天</span></a>
+        <a href="/positions/{{ is_all }}30" class="btn {% if size == 30  %}btn-primary{% else %} btn-default {% endif %}"><span class="network-name">30 天</span></a>
+    </p>
+    <p style="font-size:14px;">
+       开盘日每天 15:10 准时更新，盘中最新仓位变化请看<a href="/pushes" >最新一期</a>
+    </p>
+    </div>
+</div>
+<hr>
+{% if not is_all %}
+<table class="table table-striped">
+<caption>历史仓位信息</caption>
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>仓位大小</th>
+          <th>仓位明细</th>
+          <th>其他</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for position in positions[::-1] %}
+      <tr>
+          <th scope="row">{{ position.date[5:] }}</th>
+          <td>{{ position.size }}%</td>
+          <td>{{ position.content }}</td>
+          <td><a href="/pushes/{{position.push_id}}">查看全文</a></td>
+      </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+<hr>
+{% endif %}
+{% if is_all %}
+<table class="table">
+<caption>历史仓位信息</caption>
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>仓位大小</th>
+          <th>仓位明细</th>
+          <th>交易信息</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for position in positions[::-1] %}
+      <tr class="info">
+          <th scope="row">{{ position.date[5:] }}</th>
+          <td>{{ position.size }}%</td>
+          <td>{{ position.content }}</td>
+          <td><a style="color:black" href="/pushes/{{position.push_id}}">{{ position.deals.split('<br>')[0] }}</a></td>
+      </tr>
+        {% for deal in position.deals.split('<br>')[1:] %}
+            {% if deal %}
+            <tr>
+              <th scope="row"></th>
+              <td></td>
+              <td></td>
+              <td>{{ deal }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+
+      {% endfor %}
+
+      </tbody>
+    </table>
+<hr>
+<div style="text-align:center">
+<p style="font-size:14px;">
+      <i class="fa fa-star fa-fw"></i>小贴士：点击每天的第一条交易可以「查看全文」
+    </p>
+</div>
+{% endif %}
+<div style="text-align:right">
+    <p style="font-size:16px;">
+        <a href="/positions/{{ size }}" class="btn {% if not is_all  %}btn-primary{% else %} btn-default {% endif %}"><span class="network-name">简洁版</span></a>
+        <a href="/positions/all/{{ size }}" class="btn {% if  is_all  %}btn-primary{% else %} btn-default {% endif %}"><span class="network-name">丰富版</span></a>
+    </p>
+    <p style="font-size:14px;">
+      「丰富版」还包括每天的交易信息统计
+    </p>
+</div>
+<hr>
+  <script>
+    var dateArray = []
+    var positionArray = []
+    {% for position in positions %}
+        dateArray.push('{{ position.date[5:] }}')
+        positionArray.push('{{ position.size }}')
+    {% endfor %}
+    var lineChartData = {
+      labels : dateArray,
+      datasets : [
+        {
+          label: "My Second dataset",
+          fillColor : "rgba(151,187,205,0.2)",
+          strokeColor : "rgba(151,187,205,1)",
+          pointColor : "rgba(151,187,205,1)",
+          pointStrokeColor : "#fff",
+          pointHighlightFill : "#fff",
+          pointHighlightStroke : "rgba(151,187,205,1)",
+          data : positionArray
+        }
+      ]
+
+    }
+
+  window.onload = function(){
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myLine = new Chart(ctx).Line(lineChartData, {
+      responsive: true
+    });
+  }
+  </script>
+
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="positions" data-title="仓位 - 小王子推送"
+      data-url="http://wublogpush.com/positions"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wublogpush"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+{% endblock %}

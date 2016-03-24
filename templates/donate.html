@@ -2,19 +2,25 @@
 
 {% block title %}赞助 - 小王子推送{% endblock %}
 
+{% block content %}
+{{super()}}
+<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
+<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
+{% endblock %}
+
 {% block page_content %}
-{% filter markdown %}
-###赞助
-{% endfilter %}
+<div style="border: 0px solid; height: 70px;"></div>
+
+<h3><i class="fa fa-lightbulb-o fa-fw"></i> 赞助</h3>
 <hr>
 <p style="line-height:2;font-size:16px">
 如果这个服务对你有一定的帮助，不妨小额赞助一下「小王子推送」。<br>
-你的赞助都将用于「小王子推送」服务建设，<a href="http://wublogpush.com/donate#spend">查看「赞助支出」详情</a>。<br>
+你的赞助将全部用于服务建设，<a href="/donate#spend">查看「赞助支出」详情</a>。<br>
 赞助方式有两种：微信支付、支付宝支付。
 </p>
 <hr>
 <p style="line-height:2;font-size:16px">
-如果你只想感谢我个人，可以给我小费，顺便看看「小王子推送」一步一步的成长，<a href="http://wublogpush.com/tip">点击此处给小费</a>。<br>下方的赞助方式都是赞助「小王子推送」。<br>
+如果你想感谢我个人，感谢我一个人独立开发了「小王子推送」这个服务，激励我继续完善、维护这个服务，可以<a href="/tip">点击此处给我小费</a>。<br>下方的赞助方式是赞助「小王子推送」，将全部用于服务建设。<br>
 </p>
 <hr>
 <h4><b>赞助方式一：微信支付</b></h4>
@@ -123,22 +129,25 @@
 <hr>
 <p style="line-height:2;font-size:16px">
 目前支出主要在三方面：服务费、群建设、赞赏wu2198。</p>
+<hr style="height:1px;border:none;border-top:1px dashed #E0E0E0;" />
 <h4><b>服务费</b></h4>
 <p style="line-height:2;font-size:16px">
 主要包括两台阿里云服务器、SendCloud邮件发送服务，以及少量的域名年费、云解析年费、云存储费。</p>
+<hr style="height:1px;border:none;border-top:1px dashed #E0E0E0;" />
 <h4><b>群建设</b></h4>
 <p style="line-height:2;font-size:16px">
 赞赏对群直播、邮件推送等服务提出有价值建议的朋友，鼓励多提建议、多反馈，以让服务变得越来越好。<br>
 目前已赞赏知易、飞影，谢谢他们的宝贵建议。<br>
-以后可能还会增加其他「群建设」支出，欢迎大家给建议，可评论区留言。</p>
+以后可能还会增加其他「群建设」支出，欢迎大家给建议。</p>
+<hr style="height:1px;border:none;border-top:1px dashed #E0E0E0;" />
 <h4><b>赞赏wu2198</b></h4>
 <p style="line-height:2;font-size:16px">
 本服务完全基于wu2198的直播博文，没有wu2198，就没有这个服务。<br>
-而且没经wu2198的允许，将内容自动整理通过邮件推送，尽管曾尝试沟通，但未得到回复。<br>
-为了表示对wu2198的感谢，以后会将每期赞助资金的总额按一定比例以赞赏的方式给wu2198。<br>
-「一定比例」将视赞赏总额在10%～20%内自由调整，大于国内大部分出版版税，主流的是低于10%。<br>前两期赞助资金支出的剩余作了第一次的赞赏，比例是14.7%。<br>
-有人可能会反对，说wu2198不在乎这么点钱。<br>
-其实给赞赏不在于钱的多少，而是心意，而且未经允许转载wu2198的博客内容本身就不太对，也算是一种弥补。<br>希望大家理解并支持这项「赞赏wu2198」支出。
+而且未经wu2198允许，将其博文内容自动整理通过邮件推送，并在该网站显示。尽管我曾尝试联系沟通，但未得到回复。<br>
+为了表示对wu2198的感谢，也是为了弥补「本服务未经允许转载wu2198博客内容」，以后会将每期赞助资金的总额按一定比例以赞赏的方式给wu2198。<br>
+「一定比例」将视赞赏总额在10%～20%内自由调整，大于国内大部分出版版税，主流的是低于10%。<br>前两期赞助资金支出的剩余已经作为了第一次的赞赏，比例是14.7%。<br>
+希望大家理解并支持这项「赞赏wu2198」支出。
+<hr style="height:1px;border:none;border-top:1px dashed #E0E0E0;" />
 </p>
 <table class="table table-striped">
 <caption>赞助支出记录</caption>
@@ -220,7 +229,7 @@
           <td></td>
           <td>￥1295.43</td>
           <td></td>
-          <td>赞助剩余￥76</td>
+          <td></td>
         </tr>
          </tbody>
 </table>

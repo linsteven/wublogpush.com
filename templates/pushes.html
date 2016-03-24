@@ -2,17 +2,25 @@
 
 {% block title %}第{{pushId}}期 - 小王子推送{% endblock %}
 
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
+<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
+{% endblock %}
+
 {% block page_content %}
+<div style="border: 0px solid; height: 70px;"></div>
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message|safe }}
+    </div>
+{% endfor %}
 <h3>{{pushTitle}}</h3>
 <p style="line-height:1.8;">
  小王子推送第{{pushId}}期<br>
   推送时间：{% if pushTime %}{{pushTime}}{% else %}未知{% endif %}
 </p>
-<hr>
-<ul class="pager">
-    <li class="previous"><a href="../gopushes/{{preId}}">&larr; 上一篇</a></li>
-    <li class="next"><a href="../gopushes/{{nextId}}">下一篇 &rarr;</a></li>
-</ul>
 <hr>
 {% if news %}
 <h style="font-size:20px"><b>最新动态</b></h>
@@ -50,8 +58,8 @@
   </div>
 <hr>
 <ul class="pager">
-    <li class="previous"><a href="../gopushesend/{{preId}}">&larr; 上一篇</a></li>
-    <li class="next"><a href="../gopushesend/{{nextId}}">下一篇 &rarr;</a></li>
+    <li class="previous"><a href="{{preId}}">&larr; 上一篇</a></li>
+    <li class="next"><a href="{{nextId}}">下一篇 &rarr;</a></li>
 </ul>
 <hr>
 
@@ -72,6 +80,5 @@ var duoshuoQuery = {short_name:"wublogpush"};
   })();
   </script>
 <!-- 多说公共JS代码 end -->
-
 
   {% endblock %}

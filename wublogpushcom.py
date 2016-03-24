@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import re
+import sys
 import datetime
 from flask import Flask, render_template,redirect, url_for, flash
+from flask import request
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
@@ -13,9 +16,9 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from mytoken import generate_confirmation_token, confirm_token
 from sendemail import sendActivate, sendSuccess, sendUnsubscribe
 from doAddressLst import addToAddrLst, delFromAddrLst
-from log import LogGoPushes
-from log import LogGoPushesEnd
 
+reload(sys)
+sys.setdefaultencoding('utf8')
 #basedir = "/home/yyl/WuBlogPush2"
 basedir = "/Users/yyl/Projects/WuBlogPush2"
 app = Flask(__name__)
@@ -42,6 +45,21 @@ class Push(db.Model):
 
     def __repr__(self):
         return '<Mesg %r>' % self.content
+
+class Position(db.Model):
+    __tablename__ = 'positions'
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Text)
+    size = db.Column(db.Text)
+    content = db.Column(db.Text)
+    deals = db.Column(db.Text)
+    push_id = db.Column(db.Text)
+
+    def get_id(self):
+        return self.id
+
+    def __repr__(self):
+        return '<Mesg %r>' % self.id
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -77,40 +95,40 @@ class EmailForm(Form):
     submit = SubmitField(u'立即订阅')
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
-    email = None
-    form = EmailForm()
-    if form.validate_on_submit():
-        email = form.email.data
-        email = str(email)
-        isConfirmed = False
-        #add user to db
-        try:
-            user = User.query.filter_by(email=email).first()
-        except:
-            user = None
-        token = generate_confirmation_token(email)
-        if user is None:
-            user = User(email=email,token=token,confirmed=False)
-            db.session.add(user)
-            db.session.commit()
-        elif user.confirmed and user.unsubscribed is False:
-            isConfirmed = True
-            flash(u'您已订阅过小王子推送。<br>\
-                    如果您还没有收到过任何小王子推送的邮件，\
-                    请<a href="http://wublogpush.com/about"><b>联系我</b></a>')
-        else:
-            user.subscribed_on = datetime.datetime.now()
-            db.session.add(user)
-            db.session.commit()
-        # send email of validation
-        if isConfirmed is False:
-            sendActivate(email, token)
-            flash(u'请尽快进入您的邮箱 ' + email + u' 完成激活，激活后即可订阅成功！')
-        form.email.data = ''
-        return redirect(url_for('index'))
-    return render_template('index.html',form=form)
+    return render_template('index.html')
+
+
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    email = request.form['email']
+    #print email
+    if not re.match(r'^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$', email):
+        return "请输入正确的邮箱"
+    isConfirmed = False
+    #add user to db
+    try:
+        user = User.query.filter_by(email=email).first()
+    except:
+        user = None
+    token = generate_confirmation_token(email)
+    if user is None:
+        user = User(email=email,token=token,confirmed=False)
+        db.session.add(user)
+        db.session.commit()
+    elif user.confirmed and user.unsubscribed is False:
+        isConfirmed = True
+        return '''您已订阅过小王子推送。如果您还没有收到过任何小王子推送的邮件,请联系我们'''
+    else:
+        user.subscribed_on = datetime.datetime.now()
+        db.session.add(user)
+        db.session.commit()
+    # send email of validation
+    if isConfirmed is False:
+        sendActivate(email, token)
+        return '请尽快进入您的邮箱<' + email + '>完成激活，激活后即可订阅成功！'
+
 
 @app.route('/activate/<string:token>', methods=['GET'])
 def confirm_email(token):
@@ -153,17 +171,6 @@ def unsubscribe(token):
         delFromAddrLst(email)
     return render_template('unsubscribe.html')
 
-@app.route('/gopushes/<int:go_push_id>', methods=['GET'])
-def go_pushes(go_push_id):
-    LogGoPushes()
-    return redirect(url_for('pushes', push_id=go_push_id))
-
-
-@app.route('/gopushesend/<int:go_push_id>', methods=['GET'])
-def go_pushes_end(go_push_id):
-    LogGoPushesEnd()
-    return redirect(url_for('pushes', push_id=go_push_id))
-
 @app.route('/pushes/<int:push_id>', methods=['GET'])
 def pushes(push_id):
     MAXID = 365 * 10 * 100
@@ -194,6 +201,46 @@ def latestPush():
     except:
         return render_template('404.html'), 404
     return redirect(url_for('pushes', push_id=latestPushId))
+
+@app.route('/positions', methods=['GET'])
+def positions():
+    try:
+        latestPosId = Position.query.order_by('-id').first_or_404().id
+    except:
+        return render_template('404.html'), 404
+    #return str(latestPosId)
+    my_lst = range(latestPosId - 6, latestPosId + 1)
+    positions = Position.query.filter(Position.id.in_(my_lst)).all()
+    return render_template('positions.html', positions=positions, size=7)
+
+@app.route('/positions/<int:count>', methods=['GET'])
+def positions_count(count):
+    try:
+        latestPosId = Position.query.order_by('-id').first_or_404().id
+    except:
+        return render_template('404.html'), 404
+    start_id = latestPosId - count + 1
+    if start_id < 0:
+        start_id = 0
+        flash(u"已显示所有仓位信息")
+    my_lst = range(start_id, latestPosId + 1)
+    positions = Position.query.filter(Position.id.in_(my_lst)).all()
+    return render_template('positions.html', positions=positions,size=len(my_lst))
+
+@app.route('/positions/all/<int:count>', methods=['GET'])
+def positions_count_all(count):
+    try:
+        latestPosId = Position.query.order_by('-id').first_or_404().id
+    except:
+        return render_template('404.html'), 404
+    start_id = latestPosId - count + 1
+    if start_id < 0:
+        start_id = 0
+        flash(u"已显示所有仓位信息")
+    my_lst = range(start_id, latestPosId + 1)
+    positions = Position.query.filter(Position.id.in_(my_lst)).all()
+    return render_template('positions.html',
+            positions=positions,size=len(my_lst),is_all='all/')
 
 @app.route('/FAQ', methods=['GET'])
 def FAQ():

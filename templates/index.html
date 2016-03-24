@@ -2,140 +2,328 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block title %}小王子推送 - 首页{% endblock %}
 
+{% block index_content %}
+<a name="about"></a>
+<div class="intro-header">
+    <div class="container">
 
-{% block page_content %}
-<h3>小王子推送</h3>
-<p style="line-height:2;font-size:16px">
-  小王子推送是一个实时邮件推送<a href="http://blog.sina.com.cn/s/articlelist_1216826604_0_1.html"
-  style="color: #6495ED;text-decoration:none;"
-  target="_blank">wu2198股市直播</a>中仓位变化的免费服务。
-<hr>
-<h3>订阅</h3>
-{{ wtf.quick_form(form, horizontal_columns=('lg', 3, 20)) }}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>小王子推送</h1>
+                    <h3>一款专为「wu2198粉丝」打造的推送直播服务</h3>
+                    <hr class="intro-divider">
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                            <a href="#email-push" class="btn btn-default btn-lg"><i class="fa fa-send fa-fw"></i> <span class="network-name">邮件推送</span></a>
+                        </li>
+                        <li>
+                            <a href="#group-live" class="btn btn-default btn-lg"><i class="fa fa-tv fa-fw"></i> <span class="network-name">群 直 播</span></a>
+                        </li>
+                        <li>
+                            <a href="#line-chart" class="btn btn-default btn-lg"><i class="fa fa-line-chart fa-fw"></i> <span class="network-name">仓位统计</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-<div>
-  <p>
-  </p>
-  <p style="line-height:2;font-size:16px">
-  你的邮箱将只用于小王子推送，你也可以随时取消订阅。还等什么？<b>赶快订阅吧！</b>
-  </p>
+    </div>
+    <!-- /.container -->
+
 </div>
+<!-- Page Content -->
 
-<hr>
-<h3>常见问题</h3>
-<p>
-<li style="line-height:2.0;font-size:16px">
-  <a href="FAQ" style="color: #6495ED;text-decoration:none;">
-    该推送服务收费吗？</a>
-</li>
-<li style="line-height:2;font-size:16px">
-  <a href="FAQ" style="color: #6495ED;text-decoration:none;">
-    每天会收到多少邮件？</a>
-</li>
-<li style="line-height:2;font-size:16px">
-  <a href="FAQ" style="color: #6495ED;text-decoration:none;">
-    邮件推送的及时性如何？</a>
-</li>
-<li style="line-height:2;font-size:16px">
-  <a href="FAQ" style="color: #6495ED;text-decoration:none;">
-    收到邮件后，如何第一时间看到邮件？</a>
-</li>
-<li style="line-height:2;font-size:16px">
-  <a href="FAQ" style="color:#6495ED;text-decoration:none;">
-    订阅服务后，收件箱看起来都是股票邮件，该如何整理？</a>
-</li>
-<p>
-<hr>
 
-<h3>鸣谢</h3>
 
-<p>
-<li style="line-height:2.0;font-size:16px">
-感谢<a href="http://weibo.com/wu2198"
-style="color: #6495ED;text-decoration:none;"·
-target="_blank">wu2198</a>在<a href="http://blog.sina.com.cn/s/articlelist_1216826604_0_1.html"
-style="color: #6495ED;text-decoration:none;" target="_blank">新浪博客</a>的无私奉献
-</li>
-<li style="line-height:2.0;font-size:16px">
-    感谢我的好朋友国君提供的宝贵建议
-</li>
-<li style="line-height:2.0;font-size:16px">
-    感谢钇博、社团话事人、Andy、超级牛宝宝、威威虎、棉棉等的帮助、鼓励或反馈
-</li>
-<li style="line-height:2.0;font-size:16px">
-    感谢wu2198粉丝VIP群、刘鹏程Sai.L粉丝群的众多群友的体验使用，并给予很大的支持
-</li>
-</p>
-<p>
-<span style="line-height:2.0;font-size:18px">赞助感谢名单：</span>
-<li style="line-height:2.0;font-size:16px">
-社团话事人
-</li>
-<li style="line-height:2.0;font-size:16px">
-钇博
-</li>
-<li style="line-height:2.0;font-size:16px">
-威威虎
-</li>
-<li style="line-height:2.0;font-size:16px">
-凡人
-</li>
-<li style="line-height:2.0;font-size:16px">
-大漠
-</li>
-<li style="line-height:2.0;font-size:16px">
-Andy
-</li>
-<li style="line-height:2.0;font-size:16px">
-超级牛宝宝
-</li>
-<li style="line-height:2.0;font-size:16px">
-小旬
-</li>
-<li style="line-height:2.0;font-size:16px">
-大汉散人
-</li>
-<li style="line-height:2.0;font-size:16px">
-树昇
-</li>
-<li style="line-height:2.0;font-size:16px">
-PengJin
-</li>
-<li style="line-height:2.0;font-size:16px">
-如意
-</li>
-<li style="line-height:2.0;font-size:16px">
-破晓
-</li>
-<li style="line-height:2.0;font-size:16px">
-该删的删
-</li>
-<li style="line-height:2.0;font-size:16px">
-金艺
-</li>
-<li style="line-height:2.0;font-size:16px">
-彼岸
-</li>
-<li style="line-height:2.0;font-size:16px">
-欣树
-</li>
-<li style="line-height:2.0;font-size:16px">
-鹏
-</li>
-<li style="line-height:2.0;font-size:16px">
-潮妈浮萍
-</li>
-<li style="line-height:2.0;font-size:16px">
-小2口青
-</li>
-<li style="line-height:2.0;font-size:16px">
-eos70d
-</li>
-<li style="line-height:2.0;font-size:16px">
-Yan
-</li>
-<li style="line-height:2.0;font-size:16px">
-wizard04
-</li>
-</p>
+<a  name="email-push"></a>
+<div class="content-section-a">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading"><i class="fa fa-send fa-fw"></i> 邮件推送</h2>
+                <h4 class="section-heading2">实时推送「wu2198股市直播」仓位变化篇以及中午、盘后两篇直播汇总，把直播带回家</h4>
+                <p class="lead">
+                  <li style="line-height:2.0;font-size:16px">
+                      交易信息及时知晓
+                  </li>
+                  <li style="line-height:2.0;font-size:16px">
+                      仓位变化清晰可见
+                  </li>
+                    <li style="line-height:2.0;font-size:16px">
+                      专业的邮件发送服务商SendCloud
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                       精心设计的邮件排版
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                       邮件订阅方便您的整理学习
+                    </li>
+                </p>
+
+                <br>
+                <ul class="list-inline intro-social-buttons">
+                    <li>
+                        <a href="#subscribe" class="btn btn-default btn-lg"><i class="fa fa-envelope fa-fw"></i> <span class="network-name">前往订阅</span></a>
+                    </li>
+                </ul>
+
+            </div>
+            <div id="box" class="col-lg-5 col-lg-offset-2 col-sm-6">
+            <br>
+                <img class="img-responsive" src="../static/img/ipadmini.png" alt="">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.content-section-a -->
+<a  name="group-live"></a>
+<div class="content-section-b">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading"><i class="fa fa-television fa-fw"></i> 群直播</h2>
+                <h4 class="section-heading2">盘中自动直播「wu2198股市直播」博文更新，免除您不断刷新博客的烦恼</h4>
+                <p class="lead">
+                    <li style="line-height:2.0;font-size:16px">
+                        实时性高，延时 1 秒左右
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        交易信息重点显示
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        盘中禁言，最纯粹的直播内容
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        11:40、15:10推送「小王子推送」版直播汇总
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        可智能更换代理，力保稳定直播
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        QQ群、微信群任您选择
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        站在巨人（腾讯）的肩膀上，优质的用户体验
+                    </li>
+                </p>
+                <br>
+                <ul class="list-inline intro-social-buttons">
+                    <li>
+                        <a href="#join-group" class="btn btn-default btn-lg"><i class="fa fa-qq fa-fw"></i>／<i class="fa fa-wechat fa-fw"></i> <span class="network-name">立即加入</span></a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+            <br>
+                <img class="img-responsive" src="../static/img/iphone6s.png" alt="">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.content-section-b -->
+
+<a  name="line-chart"></a>
+<div class="content-section-a">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading"><i class="fa fa-line-chart fa-fw"></i> 仓位统计</h2>
+                <h4 class="section-heading2">图表统计显示wu2198历史仓位变化、交易信息汇总，助您学习仓位管理</h4>
+                <p class="lead">
+                    <li style="line-height:2.0;font-size:16px">
+                        折线显示，仓位变化一目了然
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        表格显示仓位信息、交易详情
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        三档统计周期可自由选择
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        简洁版、丰富版表格，交易信息汇总可见可不见
+                    </li>
+                </p>
+                <br>
+                <ul class="list-inline intro-social-buttons">
+                    <li>
+                        <a href="positions" class="btn btn-default btn-lg"><i class="fa fa-eye fa-fw"></i> <span class="network-name">立即查看</span></a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+            <br>
+                <img class="img-responsive" src="../static/img/positions.png" alt="">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.content-section-a -->
+
+<a  name="group-live"></a>
+<div class="content-section-b">
+
+    <div class="container">
+
+        <div class="row">
+             <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading"><i class="fa fa-newspaper-o fa-fw"></i> 最新一期</h2>
+                <h4 class="section-heading2">「邮件推送」内容的网页版，随时知道wu2198最新仓位、当前交易</h4>
+                <p class="lead">
+                    <li style="line-height:2.0;font-size:16px">
+                        交易信息的汇总
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        最新仓位的变化情况
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        「上一篇」、「下一篇」可浏览历史推送
+                    </li>
+                    <li style="line-height:2.0;font-size:16px">
+                        若不方便用邮件，可将「http://wublogpush.com/pushes」添加至收藏夹，方便查看
+                    </li>
+                </p>
+                <br>
+                <ul class="list-inline intro-social-buttons">
+                    <li>
+                        <a href="pushes" class="btn btn-default btn-lg"><i class="fa fa-eye fa-fw"></i> <span class="network-name">立即查看</span></a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+            <br>
+                <img class="img-responsive" src="../static/img/pushes.png" alt="">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.content-section-b -->
+
+<a  name="subscribe"></a>
+<div class="subscribe">
+    <div class="container">
+      <div class="row">
+        <div>
+          <h2 class="section-heading">订阅邮件推送</h2>
+        </div>
+        <hr class="subscribe-heading-spacer">
+
+<form class="form-inline">
+          <div class="form-group">
+              <input type="email" id="txtEmail" name="email" size="35" class="form-control input-lg" placeholder="电子邮箱" required>
+          </div>
+          <br>
+          <br>
+          <button type="button" class="btn btn-lg btn-primary">立即订阅</button>
+      </form>
+
+          <br>
+       <div>
+         <p style="line-height:2;font-size:18px">
+           建议用「QQ邮箱」订阅，因为QQ邮箱收信速度更快，邮件排版显示也更好。<br>
+           你也可以随时取消订阅。还等什么？<b>赶快订阅吧！</b>
+         </p>
+       </div>
+     </div>
+     <!-- /.row -->
+   </div>
+   <!-- /.container -->
+</div>
+<!-- /.subscribe -->
+
+
+<a  name="join-group"></a>
+<div class="join-group">
+    <div class="container">
+      <div class="row">
+        <div>
+          <h2 class="section-heading">加入直播群</h2>
+       </div>
+       <hr class="group-heading-spacer">
+       <div>
+         <h4 class="section-heading3"><i class="fa fa-qq fa-fw"></i>「QQ 直播群」</h4>
+      <p style="line-height:2;font-size:16px;margin-bottom:15px">
+      小王子推送直播群<br>
+      481242190
+      </p>
+      <p style="line-height:2;">
+        可搜索以上群名或群号申请加入
+      </p>
+      <hr class="group-mid-heading-spacer">
+      <h4 class="section-heading3"><i class="fa fa-wechat fa-fw"></i> 「微信直播群」</h4>
+      <p style="line-height:2;font-size:16px">
+      加直播小王子的微信：linsteven123<br>
+      会拉你进群
+      </p>
+    </div>
+     </div>
+
+     </div>
+     <!-- /.row -->
+   </div>
+   <!-- /.container -->
+</div>
+<!-- /.subscribe -->
+
+<a  name="contact"></a>
+  <div class="banner">
+
+      <div class="container">
+
+          <div class="row">
+              <div class="col-lg-6">
+                  <h2>关注、联系、支持我们</h2>
+              </div>
+              <div class="col-lg-6">
+                  <ul class="list-inline banner-social-buttons">
+                      <li>
+                          <a href="http://weibo.com/wublogpush" class="btn btn-default btn-lg"><i class="fa fa-weibo fa-fw"></i> <span class="network-name">官方微博</span></a>
+                      </li>
+                      <li>
+                          <a href="/about#comment" class="btn btn-default btn-lg"><i class="fa fa-comment fa-fw"></i> <span class="network-name">留言反馈</span></a>
+                      </li>
+                      <li>
+                          <a href="mailto:wu@batch.wublogpush.com" class="btn btn-default btn-lg"><i class="fa fa-envelope fa-fw"></i> <span class="network-name">邮件交流</span></a>
+                      </li>
+                      <li>
+                          <a href="/donate" class="btn btn-default btn-lg"><i class="fa fa-gift fa-fw"></i> <span class="network-name">赞助支持</span></a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+
+      </div>
+      <!-- /.container -->
+  </div>
+  <!-- /.banner -->
+
+
 {% endblock %}

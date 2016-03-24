@@ -28,8 +28,8 @@ def sendActivate(email, token) :
     "template_invoke_name" : "template_activate",
     "substitution_vars" : json.dumps(sub_vars),
     "from" : "wu@batch.wublogpush.com",
-    "fromname" : "吴姐推送",
-    "subject" : "欢迎订阅吴姐推送，请尽快完成激活！",
+    "fromname" : "小王子推送",
+    "subject" : "欢迎订阅小王子推送，请尽快完成激活！",
     "resp_email_id": "true",
     }
   r = requests.post(mailUrl, files={}, data=params)
@@ -50,8 +50,8 @@ def sendSuccess(email) :
     "template_invoke_name" : "template_success",
     "substitution_vars" : json.dumps(sub_vars),
     "from" : "wu@batch.wublogpush.com",
-    "fromname" : "吴姐推送",
-    "subject" : "恭喜您成功订阅吴姐推送！",
+    "fromname" : "小王子推送",
+    "subject" : "恭喜您成功订阅小王子推送！",
     "resp_email_id": "true",
     }
   r = requests.post(mailUrl, files={}, data=params)
@@ -74,8 +74,8 @@ def sendUnsubscribe(email, token):
     "template_invoke_name" : "template_unsubscribe",
     "substitution_vars" : json.dumps(sub_vars),
     "from" : "wu@batch.wublogpush.com",
-    "fromname" : "吴姐推送",
-    "subject" : "感谢你对吴姐推送的一路支持！",
+    "fromname" : "小王子推送",
+    "subject" : "感谢你对小王子推送的一路支持！",
     "resp_email_id": "true",
     }
   r = requests.post(mailUrl, files={}, data=params)
