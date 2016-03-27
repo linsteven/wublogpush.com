@@ -4,8 +4,7 @@
 
 {% block content %}
 {{super()}}
-<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
-<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
+<script src="http://source.wublogpush.com/static%2Fjs%2FChart.js"></script>
 {% endblock %}
 
 {% block page_content %}
@@ -19,7 +18,7 @@
 <h3><i class="fa fa-line-chart fa-fw"></i> 仓位统计</h3>
 <hr>
 
-<div style="width:80%;text-align:center;margin:0 auto;">
+<div style="width:90%;text-align:center;margin:0 auto;">
     <div>
         <p style="text-align:center;font-size:18px;">wu2198股市直播仓位变化图</p>
     </div>
@@ -115,6 +114,8 @@
     </p>
 </div>
 <hr>
+<br>
+<br>
   <script>
     var dateArray = []
     var positionArray = []
@@ -147,21 +148,5 @@
   }
   </script>
 
-<!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="positions" data-title="仓位 - 小王子推送"
-      data-url="http://wublogpush.com/positions"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"wublogpush"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0]
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
-<!-- 多说公共JS代码 end -->
+
 {% endblock %}

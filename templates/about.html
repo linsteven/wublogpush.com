@@ -2,12 +2,6 @@
 
 {% block title %}关于 - 小王子推送{% endblock %}
 
-{% block content %}
-{{super()}}
-<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
-<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
-{% endblock %}
-
 {% block page_content %}
 <div style="border: 0px solid; height: 70px;"></div>
 <h3><i class="fa fa-info fa-fw"></i> 关于</h3>

@@ -2,12 +2,6 @@
 
 {% block title %}鸣谢 - 小王子推送{% endblock %}
 
-{% block content %}
-{{super()}}
-<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
-<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
-{% endblock %}
-
 {% block page_content %}
 <div style="border: 0px solid; height: 70px;"></div>
 <h3><i class="fa fa-gift fa-fw"></i> 鸣谢</h3>
@@ -39,7 +33,7 @@ style="color: #6495ED;text-decoration:none;" target="_blank">「新浪博客」<
 </li>
 </p>
 <hr>
-<h3>赞助感谢名单</h3>
+<h3><i class="fa fa-list-ul fa-fw"></i> 赞助感谢名单</h3>
 <hr>
 <h4>第 1 期赞助</h4>
 <p style="line-height:2;font-size:16px">
@@ -191,7 +185,7 @@ style="color: #6495ED;text-decoration:none;" target="_blank">「新浪博客」<
         <tr>
           <th scope="row">总计</th>
           <td></td>
-          <td>￥504.28</td>
+          <td><del>￥504.28</del></td>
           <td></td>
         </tr>
       </tbody>
@@ -421,8 +415,8 @@ style="color: #6495ED;text-decoration:none;" target="_blank">「新浪博客」<
         <tr>
           <th scope="row">总计</th>
           <td></td>
-          <td>￥641.15</td>
-          <td>不包括红包</td>
+          <td><del>￥641.15</del></td>
+          <td></td>
         </tr>
       </tbody>
     </table>
@@ -521,9 +515,15 @@ style="color: #6495ED;text-decoration:none;" target="_blank">「新浪博客」<
           <td>2016-03-21</td>
         </tr>
         <tr>
+          <th scope="row">14</th>
+          <td>aiyan</td>
+          <td>支付宝</td>
+          <td>2016-03-25</td>
+        </tr>
+        <tr>
           <th scope="row">总计</th>
           <td></td>
-          <td>￥298.8</td>
+          <td>￥337.8</td>
           <td></td>
         </tr>
       </tbody>

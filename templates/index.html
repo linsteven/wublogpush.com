@@ -2,6 +2,16 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block title %}小王子推送 - 首页{% endblock %}
 
+{% block content %}
+{{super()}}
+
+<!--<script src="{{url_for('.static', filename='./js/script.js',_external=True)}}"></script>-->
+<script src="http://source.wublogpush.com/static%2Fjs%2Fscript.js"></script>
+
+ <!--<link href="{{url_for('.static', filename='./css/landing-page.css',_external=True)}}" rel="stylesheet" type="text/css"/>-->
+  <link href="http://source.wublogpush.com/static%2Fcss%2Flanding-page.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
 {% block index_content %}
 <a name="about"></a>
 <div class="intro-header">
@@ -74,7 +84,7 @@
             </div>
             <div id="box" class="col-lg-5 col-lg-offset-2 col-sm-6">
             <br>
-                <img class="img-responsive" src="../static/img/ipadmini.png" alt="">
+                <img class="img-responsive" src="http://source.wublogpush.com/static%2Fimg%2Fipad-pushes.png" alt="">
             </div>
         </div>
 
@@ -127,7 +137,7 @@
             </div>
             <div class="col-lg-5 col-sm-pull-6  col-sm-6">
             <br>
-                <img class="img-responsive" src="../static/img/iphone6s.png" alt="">
+                <img class="img-responsive" src="http://source.wublogpush.com/static%2Fimg%2Fiphone6s-live.png" alt="">
             </div>
         </div>
 
@@ -172,7 +182,7 @@
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">
             <br>
-                <img class="img-responsive" src="../static/img/positions.png" alt="">
+                <img class="img-responsive" src="http://source.wublogpush.com/static%2Fimg%2Fimac-positions.png" alt="">
             </div>
         </div>
 
@@ -217,7 +227,7 @@
             </div>
             <div class="col-lg-5 col-sm-pull-6  col-sm-6">
             <br>
-                <img class="img-responsive" src="../static/img/pushes.png" alt="">
+                <img class="img-responsive" src="http://source.wublogpush.com/static%2Fimg%2Fmbp-pushes-show.png" alt="">
             </div>
         </div>
 
@@ -236,13 +246,13 @@
         </div>
         <hr class="subscribe-heading-spacer">
 
-<form class="form-inline">
-          <div class="form-group">
-              <input type="email" id="txtEmail" name="email" size="35" class="form-control input-lg" placeholder="电子邮箱" required>
+<form >
+          <div style="margin:0 auto;width:380px;text-align:left">
+              <input type="email" id="txtEmail"  name="email" class="form-control input-lg" placeholder="电子邮箱" required>
           </div>
+
           <br>
-          <br>
-          <button type="button" class="btn btn-lg btn-primary">立即订阅</button>
+          <button type="button" id="btn_subscribe" class="btn btn-lg btn-primary">立即订阅</button>
       </form>
 
           <br>

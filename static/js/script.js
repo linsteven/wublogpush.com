@@ -1,5 +1,5 @@
 $(function(){
-	$('button').click(function(){
+	$('#btn_subscribe').click(function(){
 		var user = $('#txtEmail').val();
 		$.ajax({
 			url: '/subscribe',

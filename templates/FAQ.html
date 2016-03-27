@@ -2,12 +2,6 @@
 
 {% block title %}常见问题 - 小王子推送{% endblock %}
 
-{% block content %}
-{{super()}}
-<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
-<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
-{% endblock %}
-
 {% block page_content %}
 <div style="border: 0px solid; height: 70px;"></div>
 <h3>FAQ：常见问题</h3>
@@ -24,7 +18,7 @@
 
 <h4>这个服务都是谁开发的？</h4>
 <p style="line-height:2;font-size:16px">
-  都是我一个人独立开发的，期间有很多自己的思考、想法，也有很多使用该服务的朋友给了一些非常好的建议。<br>可以说，这个一个聚集大家智慧的一个产品。
+  都是我一个人独立开发的，期间有很多自己的思考、想法，也有很多使用该服务的朋友给了一些非常好的建议。<br>可以说，这个一个聚集大家智慧的产品。
 </p>
 <hr style="height:1px;border:none;border-top:1px dashed #E0E0E0;" />
 
@@ -66,11 +60,14 @@ QQ邮箱的话，我自己写了个简单的教程（下载
 </p>
 <hr>
 <p style="line-height:2;font-size:16px">
-如果您还有什么问题，可以直接在下方评论留言，我会在看到时给您回复。
+如果您还有什么问题，可以直接在下方评论留言，我会在看到时给您回复。<br>
+评论区前7条是来自「仓位统计」的评论。
 </p>
 <hr>
+
 <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="FAQ" data-title="常见问题 - 吴姐推送" data-url="http://wublogpush.com/FAQ"></div>
+  <div class="ds-thread" data-thread-key="positions" data-title="常见问题 - 小王子推送"
+      data-url="http://wublogpush.com/positions"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

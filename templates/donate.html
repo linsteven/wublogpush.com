@@ -2,12 +2,6 @@
 
 {% block title %}赞助 - 小王子推送{% endblock %}
 
-{% block content %}
-{{super()}}
-<script src="{{url_for('.static', filename='./js/jquery.bootstrap-autohidingnavbar.js',_external=True)}}"></script>
-<script>$("nav.navbar-fixed-top").autoHidingNavbar();</script>
-{% endblock %}
-
 {% block page_content %}
 <div style="border: 0px solid; height: 70px;"></div>
 
@@ -20,7 +14,7 @@
 </p>
 <hr>
 <p style="line-height:2;font-size:16px">
-如果你想感谢我个人，感谢我一个人独立开发了「小王子推送」这个服务，激励我继续完善、维护这个服务，可以<a href="/tip">点击此处给我小费</a>。<br>下方的赞助方式是赞助「小王子推送」，将全部用于服务建设。<br>
+如果你想感谢我个人，感谢我一个人独立开发了「小王子推送」这个服务，鼓励我继续完善、维护这个服务，可以<a href="/tip">点击此处给我小费</a>。<br>下方的赞助方式是赞助「小王子推送」，将全部用于服务建设。<br>
 </p>
 <hr>
 <h4><b>赞助方式一：微信支付</b></h4>
@@ -35,7 +29,7 @@
    <li><a href="#donate-wechat-38" data-toggle="pill">￥38</a></li>
    <li><a href="#donate-wechat-68" data-toggle="pill">￥68</a></li>
    <li><a href="#donate-wechat-88" data-toggle="pill">我是土豪</a></li>
-   <li><a href="#donate-wechat-188" data-toggle="pill">我是土豪Pro</a></li>
+   <li><a href="#donate-wechat-188" data-toggle="pill">我是土豪 Pro</a></li>
    <li><a href="#donate-wechat-any" data-toggle="pill">其他</a></li>
 </ul>
 
@@ -86,7 +80,7 @@
    <li><a href="#donate-alipay-38" data-toggle="pill">￥38</a></li>
    <li><a href="#donate-alipay-68" data-toggle="pill">￥68</a></li>
    <li><a href="#donate-alipay-88" data-toggle="pill">我是土豪</a></li>
-   <li><a href="#donate-alipay-188" data-toggle="pill">我是土豪Pro</a></li>
+   <li><a href="#donate-alipay-188" data-toggle="pill">我是土豪 Pro</a></li>
    <li><a href="#donate-alipay-any" data-toggle="pill">其他</a></li>
 </ul>
 
@@ -125,7 +119,7 @@
    </div>
 </div>
 <hr>
-<h3><a name="spend" style="color: #000000;text-decoration:none;" >赞助支出</a></h3>
+<h3><i class="fa fa-credit-card fa-fw"></i> <a name="spend" style="color: #000000;text-decoration:none;" >赞助支出</a></h3>
 <hr>
 <p style="line-height:2;font-size:16px">
 目前支出主要在三方面：服务费、群建设、赞赏wu2198。</p>

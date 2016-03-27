@@ -103,7 +103,6 @@ def index():
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
     email = request.form['email']
-    #print email
     if not re.match(r'^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$', email):
         return "请输入正确的邮箱"
     isConfirmed = False
