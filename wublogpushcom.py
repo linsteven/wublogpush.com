@@ -131,12 +131,13 @@ def subscribe():
 
 @app.route('/activate/<string:token>', methods=['GET'])
 def confirm_email(token):
+    mesg = ''
     try:
         email = confirm_token(token)
     except:
-        flash(u'链接无效，请重新订阅！')
+        mesg = u'链接无效，请重新订阅！'
     if email is False:
-        flash(u'链接无效，请重新订阅！')
+        mesg = u'链接无效，请重新订阅！'
     user = User.query.filter_by(email=email).first_or_404()
     if user.confirmed is False:
         user.confirmed = True
@@ -151,8 +152,9 @@ def confirm_email(token):
         db.session.commit()
         addToAddrLst(email)
         sendSuccess(email)
-    flash(email + u' 您已成功订阅小王子推送！')
-    return redirect(url_for('index'))
+    if not mesg:
+        mesg = email + u' 恭喜您成功订阅小王子推送！'
+    return render_template('activate.html', message = mesg)
 
 @app.route('/unsubscribe/<string:token>', methods=['GET'])
 def unsubscribe(token):
@@ -257,6 +259,10 @@ def api_lastestId():
 @app.route('/donate', methods=['GET'])
 def donate():
     return render_template('donate.html')
+
+@app.route('/activate', methods=['GET'])
+def act():
+    return render_template('activate.html')
 
 @app.route('/tip', methods=['GET'])
 def tip():
