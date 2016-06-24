@@ -130,14 +130,14 @@ h6 {
 
 .group-heading-spacer {
     float:none;
-    width: 200px;
+    width: 400px;
     border-top: 3px solid #e7e7e7;
     margin-bottom: 40px;
 }
 
 .group-mid-heading-spacer {
     float:none;
-    width: 200px;
+    width: 400px;
     border-top: 2px dashed #e7e7e7;
     margin-bottom: 20px;
 }
